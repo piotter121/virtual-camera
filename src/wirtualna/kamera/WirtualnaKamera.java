@@ -10,7 +10,7 @@ package wirtualna.kamera;
  * @author Piotr Pyśk
  */
 public class WirtualnaKamera {
-
+    
     /**
      * @param args the command line arguments
      */
