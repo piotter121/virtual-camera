@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package wirtualna.kamera.model;
+package virtual.camera.model;
+
+import java.awt.Color;
 
 /**
  *
@@ -12,10 +14,16 @@ package wirtualna.kamera.model;
 public class Line {
 
     private Point start, end;
+    private Color color;
 
-    public Line(Point start, Point end) {
+    public Line(Point start, Point end, Color color) {
         this.start = start;
         this.end = end;
+        this.color = color;
+    }
+
+    public Line(Point start, Point end) {
+        this(start, end, Color.BLACK);
     }
 
     public Point getStart() {
@@ -34,9 +42,12 @@ public class Line {
         this.end = end;
     }
 
-    @Override
-    public String toString() {
-        return "Line{" + "start=" + start + ", end=" + end + '}';
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package wirtualna.kamera.model;
+package virtual.camera.model;
 
 /**
  *
@@ -18,6 +18,15 @@ public class Matrix {
         this.rows = rows;
         this.columns = columns;
         values = new double[this.rows][this.columns];
+        insertZeroes();
+    }
+
+    private void insertZeroes() {
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < this.columns; j++) {
+                values[i][j] = 0;
+            }
+        }
     }
 
     public static Matrix translation(double xTrans, double yTrans, double zTrans) {
@@ -31,15 +40,15 @@ public class Matrix {
         matrix.values = values;
         return matrix;
     }
-    
+
     public static Matrix translationOX(double xTrans) {
         return translation(xTrans, 0, 0);
     }
-    
+
     public static Matrix translationOY(double yTrans) {
         return translation(0, yTrans, 0);
     }
-    
+
     public static Matrix translationOZ(double zTrans) {
         return translation(0, 0, zTrans);
     }
@@ -119,7 +128,7 @@ public class Matrix {
         return c;
     }
 
-    public Point toPoint3D() {
+    public Point toPoint() {
         return new Point(get(0, 0), get(1, 0), get(2, 0));
     }
 

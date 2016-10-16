@@ -64,6 +64,7 @@ public class KeyController extends KeyAdapter {
                 virtualCamera.zoomOut();
                 break;
         }
+        virtualCamera.refreshView();
     }
 
 }
