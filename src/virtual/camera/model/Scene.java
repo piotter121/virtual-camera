@@ -5,6 +5,7 @@
  */
 package virtual.camera.model;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -30,7 +31,16 @@ public class Scene {
 
     public static Scene prepareSample() {
         List<Line> lines = new ArrayList<>();
-        lines.addAll(new Cuboid(new Point(-20, -10, 40), -50, 20, 40).getLines());
+        Cuboid cuboid1 = new Cuboid(new Point(-20, -10, 40), -50, 20, 40);
+        Cuboid cuboid2 = new Cuboid(new Point(-20, -10, 100), -50, 50, 20, Color.BLUE);
+        Cuboid cuboid3 = new Cuboid(new Point(20, -10, 40), 50, 50, 45, Color.GREEN);
+        Cuboid cuboid4 = new Cuboid(new Point(20, -10, 100), 35, 55, 50, Color.RED);
+        cuboid2.transform(Matrix.rotationOY(Math.toRadians(30)));
+        cuboid2.transform(Matrix.translationOX(-60));
+        lines.addAll(cuboid1.getLines());
+        lines.addAll(cuboid2.getLines());
+        lines.addAll(cuboid3.getLines());
+        lines.addAll(cuboid4.getLines());
         return new Scene(lines);
     }
 

@@ -18,6 +18,7 @@ public class Cuboid {
     private Point start;
     private double xDim, yDim, zDim;
     private Color edgeColor;
+    private List<Line> lines = new ArrayList<>(12);
 
     public Cuboid(Point start, double xDim, double yDim, double zDim, Color edgeColor) {
         this.start = start;
@@ -25,15 +26,14 @@ public class Cuboid {
         this.yDim = yDim;
         this.zDim = zDim;
         this.edgeColor = edgeColor;
+        createLines();
     }
 
     public Cuboid(Point start, double xDim, double yDim, double zDim) {
         this(start, xDim, yDim, zDim, Color.BLACK);
     }
 
-    public List<Line> getLines() {
-        List<Line> lines = new ArrayList();
-
+    private void createLines() {
         //  ^ y      _
         //  |         /| z
         //    H----G
@@ -67,6 +67,18 @@ public class Cuboid {
         lines.add(new Line(c, g, edgeColor));
         lines.add(new Line(d, h, edgeColor));
 
+    }
+
+    public List<Line> getLines() {
         return lines;
+    }
+
+    public void transform(Matrix tr) {
+        lines.stream().forEach((line) -> {
+            Point p1 = tr.multiply(line.getStart().toMatrix()).toPoint();
+            Point p2 = tr.multiply(line.getEnd().toMatrix()).toPoint();
+            line.setStart(p1);
+            line.setEnd(p2);
+        });
     }
 }

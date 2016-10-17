@@ -10,9 +10,9 @@ import java.awt.event.KeyEvent;
 import static java.awt.event.KeyEvent.VK_A;
 import static java.awt.event.KeyEvent.VK_D;
 import static java.awt.event.KeyEvent.VK_DOWN;
+import static java.awt.event.KeyEvent.VK_EQUALS;
 import static java.awt.event.KeyEvent.VK_LEFT;
 import static java.awt.event.KeyEvent.VK_MINUS;
-import static java.awt.event.KeyEvent.VK_PLUS;
 import static java.awt.event.KeyEvent.VK_RIGHT;
 import static java.awt.event.KeyEvent.VK_S;
 import static java.awt.event.KeyEvent.VK_UP;
@@ -57,7 +57,7 @@ public class KeyController extends KeyAdapter {
             case VK_DOWN:
                 virtualCamera.rotateDown();
                 break;
-            case VK_PLUS:
+            case VK_EQUALS:
                 virtualCamera.zoomIn();
                 break;
             case VK_MINUS:
