@@ -34,7 +34,6 @@ public class CameraController {
 
     public void paintScene(Graphics2D graphics) {
         this.graphics = graphics;
-        this.graphics.setStroke(new BasicStroke(5));
         cutToViewport();
         Collection<Line> linesToDraw = scene.getLines();
         linesToDraw.stream().forEach((line) -> {

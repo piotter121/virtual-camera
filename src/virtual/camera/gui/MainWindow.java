@@ -5,7 +5,6 @@
  */
 package virtual.camera.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -38,6 +37,7 @@ public class MainWindow extends JFrame {
         initInfoPanel();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(800, 600));
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;

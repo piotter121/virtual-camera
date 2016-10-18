@@ -33,18 +33,6 @@ public class Point {
         return "(" + x + ", " + y + ", " + z + ")";
     }
 
-    public void add(Point another) {
-        this.x += another.x;
-        this.y += another.y;
-        this.z += another.z;
-    }
-
-    public void substract(Point another) {
-        this.x -= another.x;
-        this.y -= another.y;
-        this.z -= another.z;
-    }
-
     @Override
     public Point clone() {
         return new Point(x, y, z);
