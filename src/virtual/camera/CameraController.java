@@ -62,23 +62,20 @@ public class CameraController {
         if (isBehindVieport(start) && isBehindVieport(end)) {
             return;
         }
-        int x1, y1, x2, y2;
-        x1 = create2DxCoordinate(start);
-        y1 = create2DyCoordinate(start);
-        x2 = create2DxCoordinate(end);
-        y2 = create2DyCoordinate(end);
+        double x1, y1, x2, y2;
 
         if (!isVisible(start)) {
             start = clipToVisible(end, start);
-            x1 = create2DxCoordinate(start);
-            y1 = create2DyCoordinate(start);
         }
 
         if (!isVisible(end)) {
             end = clipToVisible(start, end);
-            x2 = create2DxCoordinate(end);
-            y2 = create2DyCoordinate(end);
         }
+
+        x1 = create2DxCoordinate(start);
+        y1 = create2DyCoordinate(start);
+        x2 = create2DxCoordinate(end);
+        y2 = create2DyCoordinate(end);
 
         if (isVisible(start) && isVisible(end)) {
             Point2D point1 = convertToPoint2D(x1, y1);
@@ -88,12 +85,12 @@ public class CameraController {
         }
     }
 
-    private int create2DxCoordinate(Point point) {
-        return (int) (point.x * zoom / point.z);
+    private double create2DxCoordinate(Point point) {
+        return point.x * zoom / point.z;
     }
 
-    private int create2DyCoordinate(Point point) {
-        return (int) (point.y * zoom / point.z);
+    private double create2DyCoordinate(Point point) {
+        return point.y * zoom / point.z;
     }
 
     private static boolean isBehindVieport(Point point) {
@@ -115,7 +112,7 @@ public class CameraController {
         return point.z >= 1;
     }
 
-    private Point2D convertToPoint2D(int x, int y) {
+    private Point2D convertToPoint2D(double x, double y) {
         return new Point2D.Double(viewport.getWidth() / 2 + x, viewport.getHeight() / 2 - y);
     }
 }
