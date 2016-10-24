@@ -5,11 +5,11 @@
  */
 package virtual.camera.gui;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import javax.swing.JPanel;
-import virtual.camera.CameraController;
+import virtual.camera.painters.Painter;
 
 /**
  *
@@ -17,18 +17,22 @@ import virtual.camera.CameraController;
  */
 public class CameraPanel extends JPanel {
 
-    private CameraController controller;
+    private Painter painter;
 
-    public CameraPanel(CameraController controller) {
-        this.controller = controller;
-        setBackground(Color.WHITE);
+    public CameraPanel(Painter painter) {
+        this.painter = painter;
     }
 
     @Override
     public void paint(Graphics grphcs) {
         super.paint(grphcs);
         Graphics2D graphics = (Graphics2D) grphcs;
-        controller.paintScene(graphics);
+        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        painter.paintScene(graphics);
+    }
+
+    public void setPainter(Painter painter) {
+        this.painter = painter;
     }
 
 }

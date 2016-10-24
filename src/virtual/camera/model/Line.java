@@ -6,6 +6,7 @@
 package virtual.camera.model;
 
 import java.awt.Color;
+import static java.awt.Color.BLACK;
 
 /**
  *
@@ -14,16 +15,10 @@ import java.awt.Color;
 public class Line {
 
     private Point start, end;
-    private Color color;
-
-    public Line(Point start, Point end, Color color) {
-        this.start = start;
-        this.end = end;
-        this.color = color;
-    }
 
     public Line(Point start, Point end) {
-        this(start, end, Color.BLACK);
+        this.start = start;
+        this.end = end;
     }
 
     public Point getStart() {
@@ -43,11 +38,16 @@ public class Line {
     }
 
     public Color getColor() {
-        return color;
+        return BLACK;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    void transform(Matrix transformation) {
+        start.transform(transformation);
+        end.transform(transformation);
+    }
+
+    double getMinZCoordinate() {
+        return start.z < end.z ? start.z : end.z;
     }
 
 }

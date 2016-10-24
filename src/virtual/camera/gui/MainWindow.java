@@ -11,9 +11,14 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.WindowConstants;
 
 /**
@@ -24,6 +29,8 @@ public class MainWindow extends JFrame {
 
     private CameraPanel camera;
     private JPanel infoPanel;
+    private JRadioButtonMenuItem simpleProjectionMenuItem;
+    private JRadioButtonMenuItem painterAlghoritmMenuItem;
 
     public MainWindow(CameraPanel camera) {
         super("Wirtualna kamera");
@@ -37,7 +44,6 @@ public class MainWindow extends JFrame {
         initInfoPanel();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(800, 600));
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
@@ -49,6 +55,18 @@ public class MainWindow extends JFrame {
         gbc.weighty = 0;
         gbc.gridy = 1;
         add(infoPanel, gbc);
+        JMenuBar mb = new JMenuBar();
+        JMenu optionsMenu = new JMenu("Opcje");
+        simpleProjectionMenuItem = new JRadioButtonMenuItem("Bez usuwania powierzchni załsoniętych");
+        painterAlghoritmMenuItem = new JRadioButtonMenuItem("Algorytm malarski");
+        optionsMenu.add(simpleProjectionMenuItem);
+        optionsMenu.add(painterAlghoritmMenuItem);
+        ButtonGroup paintersButtonGroup = new ButtonGroup();
+        paintersButtonGroup.add(simpleProjectionMenuItem);
+        paintersButtonGroup.add(painterAlghoritmMenuItem);
+        painterAlghoritmMenuItem.setSelected(true);
+        mb.add(optionsMenu);
+        setJMenuBar(mb);
     }
 
     private void initInfoPanel() {
@@ -60,6 +78,14 @@ public class MainWindow extends JFrame {
         infoPanel.add(new JLabel("STRZAŁKI - obroty"));
         infoPanel.add(new JLabel("+/- - zoom/oddalanie"));
         infoPanel.setBorder(BorderFactory.createEtchedBorder());
+    }
+
+    public JMenuItem getSimpleProjectionMenuItem() {
+        return simpleProjectionMenuItem;
+    }
+
+    public JMenuItem getPainterAlghoritmMenuItem() {
+        return painterAlghoritmMenuItem;
     }
 
 }

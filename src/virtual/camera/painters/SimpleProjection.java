@@ -3,52 +3,45 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package virtual.camera;
+package virtual.camera.painters;
 
-import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import virtual.camera.model.Line;
 import virtual.camera.model.Point;
+import virtual.camera.model.Polygon;
 import virtual.camera.model.Scene;
 
 /**
  *
- * @author piotr
+ * @author Piotr Pyśk
  */
-public class CameraController {
+public class SimpleProjection extends Painter {
 
-    private static final int ZOOM_STEP = 20;
-
-    private Scene scene;
-    private double zoom = 200;
     private Graphics2D graphics;
     private Rectangle viewport;
 
-    CameraController(Scene scene) {
-        this.scene = scene;
+    public SimpleProjection(Scene scene) {
+        super(scene);
     }
 
+    @Override
     public void paintScene(Graphics2D graphics) {
         this.graphics = graphics;
         cutToViewport();
-        Collection<Line> linesToDraw = scene.getLines();
+        Collection<Polygon> polygons = scene.getPolygons();
+        List<Line> linesToDraw = new ArrayList<>(polygons.size() * 4);
+        polygons.stream().forEach((polygon) -> {
+            linesToDraw.addAll(polygon.getLines());
+        });
         linesToDraw.stream().forEach((line) -> {
             drawLine(line);
         });
-    }
-
-    public void incrementZoom() {
-        zoom += ZOOM_STEP;
-    }
-
-    public void decrementZoom() {
-        if (zoom > ZOOM_STEP) {
-            zoom -= ZOOM_STEP;
-        }
     }
 
     private void cutToViewport() {
@@ -83,29 +76,6 @@ public class CameraController {
             Line2D line2d = new Line2D.Double(point1, point2);
             graphics.draw(line2d);
         }
-    }
-
-    private double create2DxCoordinate(Point point) {
-        return point.x * zoom / point.z;
-    }
-
-    private double create2DyCoordinate(Point point) {
-        return point.y * zoom / point.z;
-    }
-
-    private static boolean isBehindVieport(Point point) {
-        return point.z <= 0;
-    }
-
-    private static Point clipToVisible(Point visible, Point notVisible) {
-        Point point = new Point(0, 0, 1);
-
-        double depth = Math.abs(visible.z) + Math.abs(notVisible.z);
-        double ratio = (visible.z + 1.0) / (depth);
-
-        point.x = (visible.x + notVisible.x) * ratio;
-        point.y = (visible.y + notVisible.y) * ratio;
-        return point;
     }
 
     private static boolean isVisible(Point point) {

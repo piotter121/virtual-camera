@@ -5,11 +5,16 @@
  */
 package virtual.camera;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import virtual.camera.painters.SimpleProjection;
 import javax.swing.SwingUtilities;
 import virtual.camera.gui.CameraPanel;
 import virtual.camera.gui.MainWindow;
 import virtual.camera.model.Matrix;
 import virtual.camera.model.Scene;
+import virtual.camera.painters.Painter;
+import virtual.camera.painters.PaintersAlghoritm;
 
 /**
  *
@@ -17,20 +22,27 @@ import virtual.camera.model.Scene;
  */
 public class VirtualCamera {
 
-    private static final int TRANSLATION_UNIT = 3;
-    private static final double ROTATION_UNIT = Math.toRadians(3);
+    private static final int TRANSLATION_UNIT = 1;
+    private static final double ROTATION_UNIT = Math.toRadians(1);
+    public static final int ZOOM_STEP = 20;
 
     private final MainWindow mainWindow;
     private final CameraPanel cameraPanel;
-    private final CameraController controller;
-    private Scene scene;
+    private Painter controller;
+    private final Scene scene;
 
     public VirtualCamera(Scene scene) {
         this.scene = scene;
-        this.controller = new CameraController(this.scene);
+        this.controller = new PaintersAlghoritm(this.scene);
         this.cameraPanel = new CameraPanel(controller);
         this.mainWindow = new MainWindow(this.cameraPanel);
         mainWindow.addKeyListener(new KeyController(this));
+        mainWindow.getSimpleProjectionMenuItem().addActionListener((ActionEvent ae) -> {
+            changePainter(new SimpleProjection(scene));
+        });
+        mainWindow.getPainterAlghoritmMenuItem().addActionListener((ActionEvent ae) -> {
+            changePainter(new PaintersAlghoritm(scene));
+        });
     }
 
     /**
@@ -46,6 +58,11 @@ public class VirtualCamera {
         SwingUtilities.invokeLater(() -> {
             mainWindow.setVisible(true);
         });
+    }
+
+    private void changePainter(Painter painter) {
+        this.controller = painter;
+        cameraPanel.setPainter(painter);
     }
 
     void translateLeft() {

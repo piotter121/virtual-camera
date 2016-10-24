@@ -11,7 +11,7 @@ package virtual.camera.model;
  */
 public class Matrix {
 
-    private int rows, columns;
+    private final int rows, columns;
     private double[][] values;
 
     public Matrix(int rows, int columns) {
@@ -95,19 +95,6 @@ public class Matrix {
 
     public double get(int row, int col) {
         return values[row][col];
-    }
-
-    @Override
-    public String toString() {
-        String rep = new String();
-        for (double[] row : values) {
-            rep += "| ";
-            for (double value : row) {
-                rep += value + " ";
-            }
-            rep += " |\n";
-        }
-        return rep;
     }
 
     public Matrix multiply(Matrix b) {

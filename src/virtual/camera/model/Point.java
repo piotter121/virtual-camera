@@ -38,4 +38,41 @@ public class Point {
         return new Point(x, y, z);
     }
 
+    void transform(Matrix transformation) {
+        Point newCoordinates = transformation.multiply(this.toMatrix()).toPoint();
+        x = newCoordinates.x;
+        y = newCoordinates.y;
+        z = newCoordinates.z;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.x) ^ (Double.doubleToLongBits(this.x) >>> 32));
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.y) ^ (Double.doubleToLongBits(this.y) >>> 32));
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.z) ^ (Double.doubleToLongBits(this.z) >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Point other = (Point) obj;
+        if (Double.doubleToLongBits(this.x) != Double.doubleToLongBits(other.x)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.y) != Double.doubleToLongBits(other.y)) {
+            return false;
+        }
+        return Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
+    }
+
 }
