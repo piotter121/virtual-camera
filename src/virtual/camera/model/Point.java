@@ -75,4 +75,16 @@ public class Point {
         return Double.doubleToLongBits(this.z) == Double.doubleToLongBits(other.z);
     }
 
+    public Point substract(Point other) {
+        return new Point(this.x - other.x, this.y - other.y, this.z - other.z);
+    }
+
+    public Point vectorProduct(Point other) {
+        return new Point(
+                this.y * other.z - this.z * other.y,
+                this.z * other.x - this.x * other.z,
+                this.x * other.y - this.y * other.x
+        );
+    }
+
 }
