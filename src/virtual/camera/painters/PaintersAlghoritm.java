@@ -8,13 +8,9 @@ package virtual.camera.painters;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.geom.Point2D;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Consumer;
 import virtual.camera.model.Line;
 import virtual.camera.model.Point;
 import virtual.camera.model.Polygon;
@@ -59,11 +55,12 @@ public class PaintersAlghoritm extends Painter {
 
     private void addLineToPolygon2D(Line line, java.awt.Polygon polygon2D) {
         addPointToPolygon2D(line.getStart(), polygon2D);
+        addPointToPolygon2D(line.getEnd(), polygon2D);
     }
 
     private void addPointToPolygon2D(Point point, java.awt.Polygon polygon2D) {
-        final double xCoordinate = create2DxCoordinate(point);
-        final double yCoordinate = create2DyCoordinate(point);
+        double xCoordinate = create2DxCoordinate(point);
+        double yCoordinate = create2DyCoordinate(point);
         polygon2D.addPoint(convertTo2Dx(xCoordinate), convertTo2Dy(yCoordinate));
     }
 

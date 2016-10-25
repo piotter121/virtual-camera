@@ -6,7 +6,6 @@
 package virtual.camera;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import virtual.camera.painters.SimpleProjection;
 import javax.swing.SwingUtilities;
 import virtual.camera.gui.CameraPanel;
@@ -22,8 +21,8 @@ import virtual.camera.painters.PaintersAlghoritm;
  */
 public class VirtualCamera {
 
-    private static final int TRANSLATION_UNIT = 1;
-    private static final double ROTATION_UNIT = Math.toRadians(1);
+    private static final double TRANSLATION_UNIT = 0.25;
+    private static final double ROTATION_UNIT = Math.toRadians(0.5);
     public static final int ZOOM_STEP = 20;
 
     private final MainWindow mainWindow;

@@ -34,6 +34,8 @@ public class Scene {
         Cuboid cuboid3 = new Cuboid(new Point(20, -10, 40), 50, 50, 45, Color.GREEN);
         Cuboid cuboid4 = new Cuboid(new Point(20, -10, 100), 35, 55, 50, Color.RED);
         cuboid2.transform(Matrix.rotationOY(45));
+        cuboid3.transform(Matrix.rotationOY(60));
+        cuboid3.transform(Matrix.translationOZ(20));
         polygons.addAll(cuboid1.getWalls());
         polygons.addAll(cuboid2.getWalls());
         polygons.addAll(cuboid3.getWalls());
