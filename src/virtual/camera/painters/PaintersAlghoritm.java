@@ -9,12 +9,12 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import virtual.camera.model.Line;
 import virtual.camera.model.Point;
 import virtual.camera.model.Polygon;
 import virtual.camera.model.Scene;
+import virtual.camera.painters.comparators.SurfaceComparator;
 
 /**
  *
@@ -34,7 +34,7 @@ public class PaintersAlghoritm extends Painter {
         this.graphics = graphics;
         this.viewport = this.graphics.getClipBounds();
         List<Polygon> polygons = this.scene.getPolygons();
-        Collections.sort(polygons, new DepthComparator());
+        Collections.sort(polygons, new SurfaceComparator());
         polygons.stream().forEach((Polygon polygon) -> {
             if (isVisible(polygon)) {
                 drawPolygon(polygon);
@@ -82,19 +82,6 @@ public class PaintersAlghoritm extends Painter {
 
     private static boolean isVisible(Point point) {
         return point.z > 0;
-    }
-
-    private static class DepthComparator implements Comparator<Polygon> {
-
-        @Override
-        public int compare(Polygon polygon1, Polygon polygon2) {
-            Point center1 = polygon1.getCenterPoint();
-            Point center2 = polygon2.getCenterPoint();
-            double odl1 = Math.sqrt(Math.pow(center1.x, 2) + Math.pow(center1.y, 2) + Math.pow(center1.z, 2));
-            double odl2 = Math.sqrt(Math.pow(center2.x, 2) + Math.pow(center2.y, 2) + Math.pow(center2.z, 2));
-            return (int) (odl2 - odl1);
-        }
-
     }
 
 }
