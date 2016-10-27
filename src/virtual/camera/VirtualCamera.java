@@ -36,11 +36,13 @@ public class VirtualCamera {
         this.cameraPanel = new CameraPanel(controller);
         this.mainWindow = new MainWindow(this.cameraPanel);
         mainWindow.addKeyListener(new KeyController(this));
-        mainWindow.getSimpleProjectionMenuItem().addActionListener((ActionEvent ae) -> {
+        mainWindow.getSimpleProjectionMenuItem().addActionListener((ae) -> {
             changePainter(new SimpleProjection(scene));
+            refreshView();
         });
-        mainWindow.getPainterAlghoritmMenuItem().addActionListener((ActionEvent ae) -> {
+        mainWindow.getPainterAlghoritmMenuItem().addActionListener((ae) -> {
             changePainter(new PaintersAlghoritm(scene));
+            refreshView();
         });
     }
 

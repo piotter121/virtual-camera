@@ -17,8 +17,6 @@ import java.util.Comparator;
  */
 public class SurfaceComparator implements Comparator<Polygon> {
 
-    private Comparator<Polygon> cogCom = new COGComparator();
-
     @Override
     public int compare(final Polygon p1, final Polygon p2) {
         Point point1 = p1.getLines().get(0).getStart();
@@ -35,12 +33,12 @@ public class SurfaceComparator implements Comparator<Polygon> {
         if (testIfInFront(p2Surface, p1)) {
             return 1;
         }
-        return cogCom.compare(p1, p2);
+        return 0;
     }
 
-    private boolean testIfInFront(Surface surface, Polygon polygon) {
+    public static boolean testIfInFront(Surface surface, Polygon polygon) {
         return polygon.getPoints().stream()
                 .allMatch(point -> surface.areOnTheSameSide(point, new Point(0, 0, 0)));
     }
-    
+
 }

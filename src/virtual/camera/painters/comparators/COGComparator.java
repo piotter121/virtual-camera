@@ -21,7 +21,7 @@ public class COGComparator implements Comparator<Polygon> {
         Point center2 = polygon2.getCOGPoint();
         double odl1 = Math.sqrt(Math.pow(center1.x, 2) + Math.pow(center1.y, 2) + Math.pow(center1.z, 2));
         double odl2 = Math.sqrt(Math.pow(center2.x, 2) + Math.pow(center2.y, 2) + Math.pow(center2.z, 2));
-        return (int) (odl2 - odl1);
+        return (int) Math.round(odl2 - odl1);
     }
 
 }

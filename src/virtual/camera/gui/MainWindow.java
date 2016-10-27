@@ -73,8 +73,7 @@ public class MainWindow extends JFrame {
         JLabel sterowanieLabel = new JLabel("STEROWANIE:");
         sterowanieLabel.setFont(sterowanieLabel.getFont().deriveFont(Font.BOLD, 14));
         infoPanel.add(sterowanieLabel);
-        infoPanel.add(new JLabel("WS - translacja w poziomie"));
-        infoPanel.add(new JLabel("AD - translacja w pionie"));
+        infoPanel.add(new JLabel("W/A/S/D - translacja w poziomie"));
         infoPanel.add(new JLabel("STRZAŁKI - obroty"));
         infoPanel.add(new JLabel("+/- - zoom/oddalanie"));
         infoPanel.setBorder(BorderFactory.createEtchedBorder());

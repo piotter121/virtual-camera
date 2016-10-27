@@ -8,13 +8,12 @@ package virtual.camera.painters;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.util.Collections;
 import java.util.List;
 import virtual.camera.model.Line;
 import virtual.camera.model.Point;
 import virtual.camera.model.Polygon;
 import virtual.camera.model.Scene;
-import virtual.camera.painters.comparators.SurfaceComparator;
+import virtual.camera.painters.comparators.*;
 
 /**
  *
@@ -34,7 +33,7 @@ public class PaintersAlghoritm extends Painter {
         this.graphics = graphics;
         this.viewport = this.graphics.getClipBounds();
         List<Polygon> polygons = this.scene.getPolygons();
-        Collections.sort(polygons, new SurfaceComparator());
+        polygons.sort(new DepthComparator());
         polygons.stream().forEach((Polygon polygon) -> {
             if (isVisible(polygon)) {
                 drawPolygon(polygon);
